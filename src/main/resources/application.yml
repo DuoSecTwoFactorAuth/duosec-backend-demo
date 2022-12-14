@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://duosec-backend-demo:${PASSWORD_DEMO}@dussec-backend-demo.oeuebj5.mongodb.net/?retryWrites=true&w=majority
+      database: dussec-backend-demo
