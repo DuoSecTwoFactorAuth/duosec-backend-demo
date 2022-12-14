@@ -21,4 +21,9 @@ public class EmployeeService {
         EmployeeDocument employeeDocument = employeeRepository.findByEmployeeId(login.getUsername());
         return employeeDocument.getPassword().equals(login.getPassword());
     }
+
+    public EmployeeDocument getEmployeeDetails(String employeeId) {
+        EmployeeDocument employeeDocument = employeeRepository.findByEmployeeId(employeeId);
+        return new EmployeeDocument(employeeDocument.getEmployeeId(), "********", employeeDocument.getName(), employeeDocument.getEmailId(), employeeDocument.getPhoneNumber());
+    }
 }
