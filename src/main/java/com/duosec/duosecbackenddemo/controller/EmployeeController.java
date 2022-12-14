@@ -1,13 +1,12 @@
 package com.duosec.duosecbackenddemo.controller;
 
+import com.duosec.duosecbackenddemo.document.EmployeeDocument;
 import com.duosec.duosecbackenddemo.dto.Login;
 import com.duosec.duosecbackenddemo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * User: Avinash Vijayvargiya
@@ -28,6 +27,15 @@ public class EmployeeController {
             return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
         } catch (Exception exception) {
             return new ResponseEntity<>(false, HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    @GetMapping("/employee-data")
+    public ResponseEntity<EmployeeDocument> getEmployeeDetails(@RequestParam String employeeId) {
+        try {
+            return new ResponseEntity<>(employeeService.getEmployeeDetails(employeeId), HttpStatus.ACCEPTED);
+        } catch (Exception exception) {
+            return new ResponseEntity<>(new EmployeeDocument(), HttpStatus.NOT_FOUND);
         }
     }
 }
