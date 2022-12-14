@@ -1,5 +1,6 @@
 package com.duosec.duosecbackenddemo.controller;
 
+import com.duosec.duosecbackenddemo.document.EmployeeDocument;
 import com.duosec.duosecbackenddemo.dto.Login;
 import com.duosec.duosecbackenddemo.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,16 @@ public class AdminController {
                 return new ResponseEntity<>(true, HttpStatus.ACCEPTED);
             return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
         } catch (Exception exception) {
+            return new ResponseEntity<>(false, HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    @PostMapping("/add-employee")
+    public ResponseEntity<Boolean> addAdmin(@RequestBody EmployeeDocument employeeDocument) {
+        try {
+            return new ResponseEntity<>(adminService.addEmployee(employeeDocument), HttpStatus.ACCEPTED);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
             return new ResponseEntity<>(false, HttpStatus.NOT_ACCEPTABLE);
         }
     }
